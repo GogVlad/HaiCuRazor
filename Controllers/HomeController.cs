@@ -16,17 +16,25 @@ namespace RazorMvc.Controllers
             this.intershipService = intershipService;
             _logger = logger;
         }
+
         [HttpDelete]
         public void RemoveMember(int index)
         {
             intershipService.RemoveMember(index);
         }
 
-        [HttpGet]
-        public string AddMember(string member)
+        [HttpPatch]
+        public void EditMember(int index, string member)
         {
-            return intershipService.AddMember(member);
+            intershipService.EditMember(index, member);
         }
+
+        [HttpGet]
+        public string AddMember(string name)
+        {
+            return intershipService.AddMember(name);
+        }
+
         public IActionResult Index()
         {
             return View();

@@ -5,7 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="InternshipClass.Tests\**" />
+    <Compile Remove="out\**" />
+    <Content Remove="InternshipClass.Tests\**" />
+    <Content Remove="out\**" />
+    <EmbeddedResource Remove="InternshipClass.Tests\**" />
+    <EmbeddedResource Remove="out\**" />
     <None Remove="*.log" />
+    <None Remove="InternshipClass.Tests\**" />
+    <None Remove="out\**" />
   </ItemGroup>
   
   <ItemGroup>
