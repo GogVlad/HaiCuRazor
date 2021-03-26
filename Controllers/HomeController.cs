@@ -19,7 +19,18 @@ namespace RazorMvc.Controllers
             _internshipClass = new InternshipClass();
             _logger = logger;
         }
+        [HttpDelete]
+        public void RemoveMember(int index)
+        {
+            _internshipClass.Members.RemoveAt(index);
+        }
 
+        [HttpGet]
+        public string AddMember(string member)
+        {
+            _internshipClass.Members.Add(member);
+            return member;
+        }
         public IActionResult Index()
         {
             return View();

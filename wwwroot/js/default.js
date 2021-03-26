@@ -1,20 +1,21 @@
-﻿////function addNewcomer() {
-
-////    var node = document.createElement("li");
-////    node.innerText = newcomer.value;
-////    list.appendChild(node);
-////}
-// This JS file now uses jQuery. Pls see here: https://jquery.com/
-// This JS file now uses jQuery. Pls see here: https://jquery.com/
+﻿// This JS file now uses jQuery. Pls see here: https://jquery.com/
 $(document).ready(function () {
     // see https://api.jquery.com/click/
     $("#add").click(function () {
         var newcomerName = $("#newcomer").val();
 
-        // Remember string interpolation
-        $("#list").append(`<li>${newcomerName}</li>`);
+        $.ajax({
+            url: `/Home/AddMember?member=${newcomerName}`,
+            success: function (data) {
+                // Remember string interpolation
+                $("#list").append(`<li>${data}</li>`);
 
-        $("#newcomer").val("");
+                $("#newcomer").val("");
+            },
+            error: function (data) {
+                alert(`Failed to add ${newcomerName}`);
+            },
+        });
     })
 
     $("#clear").click(function () {
