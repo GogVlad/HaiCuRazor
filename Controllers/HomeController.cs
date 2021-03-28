@@ -23,10 +23,10 @@ namespace RazorMvc.Controllers
             intershipService.RemoveMember(index);
         }
 
-        [HttpPatch]
-        public void EditMember(int index, string member)
+        [HttpPut]
+        public void EditMember(int index, string name)
         {
-            intershipService.EditMember(index, member);
+            intershipService.EditMember(index, name);
         }
 
         [HttpGet]

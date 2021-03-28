@@ -20,6 +20,7 @@ $(document).ready(function () {
         });
     })
 
+
     $("#clear").click(function () {
         $("#newcomer").val("");
     })
@@ -49,15 +50,17 @@ $(document).ready(function () {
     })
 
     $("#editClassmate").on("click", "#submit", function () {
-        var newName = $('#classmateName').val();
+        var name = $('#classmateName').val();
         var index = $('#editClassmate').attr("memberIndex");
-
-        console.log(`/Home/EditMember?index=${index}&name=${newName}`);
+        console.log(`/Home/EditMember?index=${index}&name=${name}`);
         $.ajax({
-            url: `/Home/EditMember?index=${index}&name=${newName}`,
-            type: `PATCH`,
-            succes: function (response) {
-
+            url: `/Home/EditMember?index=${index}&name=${name}`,
+            type: 'PUT',
+            success: function () {
+                location.reload();
+            },
+            error: function () {
+                alert(`Failed to replace member ${name}`);
             }
         })
     })

@@ -20,6 +20,7 @@ namespace RazorMvc.Services
         public void EditMember(int index, string name)
         {
             _internshipClass.Members[index] = name;
+
         }
 
         public InternshipClass GetClass()
