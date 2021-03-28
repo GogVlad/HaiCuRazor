@@ -23,17 +23,18 @@ namespace RazorMvc.Controllers
             intershipService.RemoveMember(index);
         }
 
+        [HttpGet]
+        public string AddMember(string member)
+        {
+            return intershipService.AddMember(member);
+        }
+
         [HttpPut]
         public void EditMember(int index, string name)
         {
             intershipService.EditMember(index, name);
         }
 
-        [HttpGet]
-        public string AddMember(string name)
-        {
-            return intershipService.AddMember(name);
-        }
 
         public IActionResult Index()
         {
