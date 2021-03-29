@@ -68,4 +68,36 @@ $(document).ready(function () {
     $("#editClassmate").on("click", "#cancel", function () {
         console.log('cancel changes');
     })
+
+
+    $.ajax({
+        url: `/WeatherForecast`,
+        success: function (data) {
+            let tommorow = data[0];
+            let tommorowDate = formatDate(tommorow.date);
+            
+            $('#date').text(tommorowDate);
+            $('#temperature').text(tommorow.tempereatureC, 'C');
+            $('#summary').text(tommorow.summary);
+        },
+        error: function (data) {
+            alert(`Failed to load date`);
+        },
+    });
+   
+    function formatDate(jsonDate) {
+
+        function join(t, a, s) {
+            function format(m) {
+                let f = new Intl.DateTimeFormat('en', m);
+                return f.format(t);
+            }
+            return a.map(format).join(s);
+        }
+
+        let date = new Date(jsonDate);
+        let a = [{ day: 'numeric' }, { month: 'short' }, { year: 'numeric' }];
+        let s = join(new Date, a, '-');
+        return s;
+    }
 });
