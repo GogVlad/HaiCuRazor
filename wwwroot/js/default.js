@@ -69,21 +69,26 @@ $(document).ready(function () {
         console.log('cancel changes');
     })
 
+    function refreshWeatherForecast() {
+        $.ajax({
+            url: `/WeatherForecast`,
+            success: function (data) {
+                let tommorow = data[0];
+                let tommorowDate = formatDate(tommorow.date);
 
-    $.ajax({
-        url: `/WeatherForecast`,
-        success: function (data) {
-            let tommorow = data[0];
-            let tommorowDate = formatDate(tommorow.date);
-            
-            $('#date').text(tommorowDate);
-            $('#temperature').text(tommorow.tempereatureC, 'C');
-            $('#summary').text(tommorow.summary);
-        },
-        error: function (data) {
-            alert(`Failed to load date`);
-        },
-    });
+                $('#date').text(tommorowDate);
+                $('#temperature').text(tommorow.temperatureC, 'C');
+                $('#summary').text(tommorow.summary);
+            },
+            error: function (data) {
+                alert(`Failed to load date`);
+            },
+        });
+    }
+
+    refreshWeatherForecast();
+
+    setInterval(refreshWeatherForecast, 5000);
    
     function formatDate(jsonDate) {
 
@@ -97,7 +102,7 @@ $(document).ready(function () {
 
         let date = new Date(jsonDate);
         let a = [{ day: 'numeric' }, { month: 'short' }, { year: 'numeric' }];
-        let s = join(new Date, a, '-');
+        let s = join(date, a, '-');
         return s;
     }
 });
