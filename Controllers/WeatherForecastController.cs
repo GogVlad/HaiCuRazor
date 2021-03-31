@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using RazorMvc.Utilities;
@@ -17,14 +18,16 @@ namespace RazorMVC.WebAPI.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching",
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IConfiguration configuration;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            this.configuration = configuration;
         }
 
         /// <summary>
@@ -34,9 +37,9 @@ namespace RazorMVC.WebAPI.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var lat = 45.75;
-            var lon = 25.3333;
-            var apiKey = "5e2f591282908129a5688c6af52aa490";
+            var lat = double.Parse(configuration["WeatherForecast:Latitude"]);
+            var lon = double.Parse(configuration["WeatherForecast:Longitude"]);
+            var apiKey = configuration["WeatherForecast:ApiKey"];
             var weatherForecasts = FetchWeatherForecasts(lat, lon, apiKey);
 
             return weatherForecasts.GetRange(1,5);
