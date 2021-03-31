@@ -6,17 +6,27 @@
 
   <ItemGroup>
     <Compile Remove="InternshipClass.Tests\**" />
+    <Compile Remove="InternshipClass.WebAPI\**" />
     <Compile Remove="out\**" />
+    <Compile Remove="RazorMVC.WebAPI\**" />
     <Content Remove="InternshipClass.Tests\**" />
+    <Content Remove="InternshipClass.WebAPI\**" />
     <Content Remove="out\**" />
+    <Content Remove="RazorMVC.WebAPI\**" />
     <EmbeddedResource Remove="InternshipClass.Tests\**" />
+    <EmbeddedResource Remove="InternshipClass.WebAPI\**" />
     <EmbeddedResource Remove="out\**" />
+    <EmbeddedResource Remove="RazorMVC.WebAPI\**" />
     <None Remove="*.log" />
     <None Remove="InternshipClass.Tests\**" />
+    <None Remove="InternshipClass.WebAPI\**" />
     <None Remove="out\**" />
+    <None Remove="RazorMVC.WebAPI\**" />
   </ItemGroup>
   
   <ItemGroup>
+    <PackageReference Include="RestClient" Version="3.446.20952" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
