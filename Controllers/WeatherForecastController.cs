@@ -34,23 +34,15 @@ namespace RazorMVC.WebAPI.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var rng = new Random();
-            var client = new RestClient("https://api.openweathermap.org/data/2.5/weather?q=Brasov&appid=5e2f591282908129a5688c6af52aa490");
-            client.Timeout = -1;
-            var request = new RestRequest(Method.GET);
-            IRestResponse response = client.Execute(request);
-            Console.WriteLine(response.Content);
+            var lat = 45.75;
+            var lon = 25.3333;
+            var apiKey = "5e2f591282908129a5688c6af52aa490";
+            var weatherForecasts = FetchWeatherForecasts(lat, lon, apiKey);
 
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureK = rng.Next(250, 320),
-                Summary = Summaries[rng.Next(Summaries.Length)],
-            })
-            .ToArray();
+            return weatherForecasts.GetRange(1,5);
         }
 
-        public IList<WeatherForecast> FetchWeatherForecasts(double lat, double lon, string apiKey)
+        public List<WeatherForecast> FetchWeatherForecasts(double lat, double lon, string apiKey)
         {
             var client = new RestClient($"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=hourly,minutely&appid={apiKey}");
             client.Timeout = -1;
@@ -60,11 +52,11 @@ namespace RazorMVC.WebAPI.Controllers
             return ConvertResponseContentToWeatherForecasts(response.Content);
         }
 
-        public IList<WeatherForecast> ConvertResponseContentToWeatherForecasts(string content)
+        public List<WeatherForecast> ConvertResponseContentToWeatherForecasts(string content)
         {
             JToken root = JObject.Parse(content);
             JToken testToken = root["daily"];
-            IList<WeatherForecast> forecasts = new List<WeatherForecast>();
+            List<WeatherForecast> forecasts = new List<WeatherForecast>();
             foreach (var token in testToken)
             {
                 var forecast = new WeatherForecast();
