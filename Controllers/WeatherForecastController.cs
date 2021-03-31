@@ -60,7 +60,7 @@ namespace RazorMVC.WebAPI.Controllers
             return ConvertResponseContentToWeatherForecasts(response.Content);
         }
 
-        private IList<WeatherForecast> ConvertResponseContentToWeatherForecasts(string content)
+        public IList<WeatherForecast> ConvertResponseContentToWeatherForecasts(string content)
         {
             JToken root = JObject.Parse(content);
             JToken testToken = root["daily"];
