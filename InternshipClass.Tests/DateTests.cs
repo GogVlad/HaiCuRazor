@@ -41,7 +41,7 @@ namespace InternshipClass.Tests
             WeatherForecast weatherForcastForTomorrow = weatherForecasts[1];
 
             // Assert
-            Assert.Equal(286.82, weatherForcastForTomorrow.TemperatureK);
+            Assert.Equal(285.39, weatherForcastForTomorrow.TemperatureK);
 
         }
 
