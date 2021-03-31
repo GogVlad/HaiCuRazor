@@ -26,6 +26,26 @@ namespace InternshipClass.Tests
         }
 
         [Fact]
+        public void ConvertOutputOfWeatherAPIToWeatherForecast()
+        {
+            // Assume
+            //https://api.openweathermap.org/data/2.5/onecall?lat=45.75&lon=25.3333&exclude=hourly,minutely&appid=5e2f591282908129a5688c6af52aa490
+            var lat = 45.75;
+            var lon = 25.3333;
+            var APIKey = "5e2f591282908129a5688c6af52aa490";
+            Microsoft.Extensions.Logging.ILogger<WeatherForecastController> nullLogger = new NullLogger<WeatherForecastController>();
+            var weatherForecastController = new WeatherForecastController(nullLogger);
+
+            // Act
+            var weatherForecasts = weatherForecastController.FetchWeatherForecasts(lat,lon,APIKey);
+            WeatherForecast weatherForcastForTomorrow = weatherForecasts[1];
+
+            // Assert
+            Assert.Equal(8, weatherForecasts.Count);
+
+        }
+
+        [Fact]
         public void ConvertWeatherJSONToWeatherForecast()
         {
             // Assume
