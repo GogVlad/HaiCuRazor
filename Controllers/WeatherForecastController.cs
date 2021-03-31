@@ -39,7 +39,7 @@ namespace RazorMVC.WebAPI.Controllers
         {
             var weatherForecasts = FetchWeatherForecasts();
 
-            return weatherForecasts.GetRange(1,5);
+            return weatherForecasts.GetRange(1, 5);
         }
 
         public List<WeatherForecast> FetchWeatherForecasts()
@@ -63,13 +63,13 @@ namespace RazorMVC.WebAPI.Controllers
             List<WeatherForecast> forecasts = new List<WeatherForecast>();
             foreach (var token in testToken)
             {
-                var forecast = new WeatherForecast();
-                forecast.Date = RazorMvc.Utilities.DateTimeConverter.ConvertEpochToDateTime(long.Parse(token["dt"].ToString()));
-                forecast.TemperatureK = double.Parse(token["temp"]["day"].ToString());
-                forecast.Summary = token["weather"][0]["description"].ToString();
-                forecasts.Add(forecast);
+                forecasts.Add(new WeatherForecast
+                {
+                    Date = RazorMvc.Utilities.DateTimeConverter.ConvertEpochToDateTime(long.Parse(token["dt"].ToString())),
+                    TemperatureK = double.Parse(token["temp"]["day"].ToString()),
+                    Summary = token["weather"][0]["description"].ToString(),
+                });
             }
-
             return forecasts;
         }
     }

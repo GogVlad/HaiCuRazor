@@ -7,10 +7,7 @@ namespace RazorMVC.WebAPI
     {
         public DateTime Date { get; set; }
 
-        public double TemperatureC
-         {
-             get { return Math.Round(TemperatureK - 273.15); }
-         }
+        public double TemperatureC => Math.Round(TemperatureK - 273.15);
 
         public string Summary { get; set; }
 
