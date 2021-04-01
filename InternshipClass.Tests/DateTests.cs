@@ -60,7 +60,8 @@ namespace InternshipClass.Tests
         {
             // Assume
             //https://api.openweathermap.org/data/2.5/onecall?lat=45.75&lon=25.3333&exclude=hourly,minutely&appid=5e2f591282908129a5688c6af52aa490
-            var content = File.ReadAllText("weatherForecast.json");
+
+            var content = GetStreamLines();
             WeatherForecastController weatherForecastController = InstantiateWeatherForecastController();
             // Act
             var weatherForecasts = weatherForecastController.ConvertResponseContentToWeatherForecasts(content);
@@ -69,6 +70,21 @@ namespace InternshipClass.Tests
             // Assert
             Assert.Equal(285.39, weatherForcastForTomorrow.TemperatureK);
 
+        }
+
+        private string GetStreamLines()
+        {
+            var assembly = this.GetType().Assembly;
+            var stream = assembly.GetManifestResourceStream("InternshipClass.Tests.weatherForecast.json");
+            StreamReader streamReader = new StreamReader(stream);
+            var streamReaderLines = "";
+
+            while (!streamReader.EndOfStream)
+            {
+                streamReaderLines += streamReader.ReadLine();
+            }
+            streamReader.Close();
+            return streamReaderLines;
         }
     }
 
