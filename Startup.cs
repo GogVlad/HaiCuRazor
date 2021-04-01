@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using RazorMvc.Data;
 using RazorMvc.Services;
 using System;
 using System.IO;
@@ -23,6 +25,9 @@ namespace RazorMvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                  options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddControllersWithViews();
             services.AddSingleton(typeof(InternshipService));
             services.AddSwaggerGen(c =>
@@ -56,6 +61,8 @@ namespace RazorMvc
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMigrationsEndPoint();
 
             app.UseEndpoints(endpoints =>
             {
