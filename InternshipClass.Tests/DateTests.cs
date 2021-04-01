@@ -5,6 +5,7 @@ using RazorMVC.WebAPI;
 using RazorMVC.WebAPI.Controllers;
 using System;
 using System.IO;
+using System.Text.Json;
 using Xunit;
 
 namespace InternshipClass.Tests
@@ -72,6 +73,24 @@ namespace InternshipClass.Tests
 
         }
 
+        [Fact]
+        public void SerializeWeatherForecast()
+        {
+            // Assume
+            WeatherForecast forecast = new WeatherForecast()
+            {
+                Date = new DateTime(2021,04,1),
+                Summary = "Sunny",
+                TemperatureK = 285.0,
+            };
+
+            // Act
+            var weatherForecastJson = JsonSerializer.Serialize(forecast);
+
+            // Assert
+
+        }
+
         private string GetStreamLines()
         {
             var assembly = this.GetType().Assembly;
@@ -85,6 +104,7 @@ namespace InternshipClass.Tests
             }
             return streamReaderLines;
         }
+
     }
 
 
