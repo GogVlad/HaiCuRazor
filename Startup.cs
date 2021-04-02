@@ -27,6 +27,8 @@ namespace RazorMvc
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                   options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<InternDbContext>(options =>
+                  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddControllersWithViews();
             services.AddSingleton(typeof(InternshipService));

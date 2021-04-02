@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RazorMvc.Data;
 using RazorMvc.Models;
 using RazorMvc.Services;
 
@@ -10,11 +11,13 @@ namespace RazorMvc.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly InternshipService intershipService;
+        private readonly InternDbContext db;
 
-        public HomeController(ILogger<HomeController> logger, InternshipService intershipService)
+        public HomeController(ILogger<HomeController> logger, InternshipService intershipService, InternDbContext db)
         {
             this.intershipService = intershipService;
             _logger = logger;
+            this.db = db;
         }
 
         [HttpDelete]
@@ -38,7 +41,8 @@ namespace RazorMvc.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var interns = db.Interns;
+            return View(interns);
         }
 
         public IActionResult Privacy()
