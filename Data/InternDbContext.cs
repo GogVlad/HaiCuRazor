@@ -18,7 +18,7 @@ namespace RazorMvc.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Intern>().ToTable("Intern");
+            modelBuilder.Entity<Intern>().ToTable("Interns");
         }
     }
 }

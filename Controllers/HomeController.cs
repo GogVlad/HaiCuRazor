@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RazorMvc.Data;
@@ -41,7 +42,7 @@ namespace RazorMvc.Controllers
 
         public IActionResult Index()
         {
-            var interns = db.Interns;
+            var interns = db.Interns.ToList();
             return View(interns);
         }
 
