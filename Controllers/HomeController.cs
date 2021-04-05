@@ -53,7 +53,7 @@ namespace RazorMvc.Controllers
 
         public IActionResult Privacy()
         {
-            return View(intershipService.GetClass());
+            return View(intershipService.GetClass().Members);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
