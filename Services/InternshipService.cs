@@ -25,9 +25,9 @@ namespace RazorMvc.Services
 
         }
 
-        public InternshipClass GetClass()
+        public IList<Intern> GetMembers()
         {
-            return _internshipClass;
+            return _internshipClass.Members;
         }
     }
 }
