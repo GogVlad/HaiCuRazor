@@ -1,4 +1,6 @@
+using RazorMvc.Models;
 using RazorMvc.Services;
+using System.Linq;
 using Xunit;
 
 namespace RazorMvc.Tests
@@ -22,13 +24,15 @@ namespace RazorMvc.Tests
         {
             // Assume
             var intershipService = new InternshipService();
+            Intern intern = new Intern();
 
             // Act
-            intershipService.AddMember("Marko");
+            intern.Name = "Marko";
+            intershipService.AddMember(intern);
 
             // Assert
             Assert.Equal(4, intershipService.GetClass().Members.Count);
-            Assert.Contains("Marko", intershipService.GetClass().Members);
+            Assert.Contains("Marko", intershipService.GetClass().Members.Select(member => member.Name));
         }
     }
 }

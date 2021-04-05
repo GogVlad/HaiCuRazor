@@ -13,15 +13,15 @@ namespace RazorMvc.Services
             _internshipClass.Members.RemoveAt(index);
         }
 
-        public string AddMember(string member)
+        public Intern AddMember(Intern member)
         {
             _internshipClass.Members.Add(member);
             return member;
         }
 
-        public void EditMember(int index, string name)
+        public void EditMember(Intern intern)
         {
-            _internshipClass.Members[index] = name;
+            _internshipClass.Members[intern.Id] = intern;
 
         }
 
