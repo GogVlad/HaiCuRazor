@@ -33,9 +33,11 @@ namespace RazorMvc.Services
             return interns;
         }
 
-        public void RemoveMember(int index)
+        public void RemoveMember(int id)
         {
-            throw new NotImplementedException();
-        }
+            var intern = db.Find<Intern>(id);
+            db.Remove<Intern>(intern);
+            db.SaveChanges();
+        } 
     }
 }

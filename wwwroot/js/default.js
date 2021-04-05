@@ -28,9 +28,9 @@ $(document).ready(function () {
     // Bind event to dynamically created element: https://makitweb.com/attach-event-to-dynamically-created-elements-with-jquery
     $("#list").on("click", ".delete", function () {
         var targetMemberTag = $(this).closest('li');
-        var index = targetMemberTag.index(targetMemberTag.parent());
+        var id = targetMemberTag.attr('member-id');
         $.ajax({
-            url: `/Home/RemoveMember/${index}`,
+            url: `/Home/RemoveMember?index=${id}`,
             type: 'DELETE',
             success: function () {
                 targetMemberTag.remove();
