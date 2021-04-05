@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,10 +12,10 @@ namespace RazorMvc.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly InternshipService intershipService;
+        private readonly IInternshipService intershipService;
         private readonly InternDbContext db;
 
-        public HomeController(ILogger<HomeController> logger, InternshipService intershipService, InternDbContext db)
+        public HomeController(ILogger<HomeController> logger, IInternshipService intershipService, InternDbContext db)
         {
             this.intershipService = intershipService;
             _logger = logger;
@@ -32,6 +33,7 @@ namespace RazorMvc.Controllers
         {
             Intern intern = new Intern();
             intern.Name = memberName;
+            intern.RegistrationDateTime = DateTime.Now;
             return intershipService.AddMember(intern);
         }
 

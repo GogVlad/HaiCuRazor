@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace RazorMvc.Services
 {
-    public class InternshipService
+    public class InternshipService : IInternshipService
     {
-        private readonly InternshipClass _internshipClass = new ();
+        private readonly InternshipClass _internshipClass = new();
 
         public void RemoveMember(int index)
         {
