@@ -13,13 +13,11 @@ namespace RazorMvc.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IInternshipService intershipService;
-        private readonly InternDbContext db;
 
-        public HomeController(ILogger<HomeController> logger, IInternshipService intershipService, InternDbContext db)
+        public HomeController(ILogger<HomeController> logger, IInternshipService intershipService)
         {
             this.intershipService = intershipService;
             _logger = logger;
-            this.db = db;
         }
 
         [HttpDelete]
@@ -49,7 +47,7 @@ namespace RazorMvc.Controllers
 
         public IActionResult Index()
         {
-            var interns = db.Interns.ToList();
+            var interns = intershipService.GetMembers();
             return View(interns);
         }
 
