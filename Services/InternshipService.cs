@@ -32,5 +32,10 @@ namespace RazorMvc.Services
         {
             return _internshipClass.Members;
         }
+
+        public void SubscribeToAddMember(IAddMemberSubscriber subscriber)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
