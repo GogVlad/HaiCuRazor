@@ -13,10 +13,12 @@ namespace RazorMvc.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IInternshipService intershipService;
+        private readonly MessageService messagepService;
 
-        public HomeController(ILogger<HomeController> logger, IInternshipService intershipService)
+        public HomeController(ILogger<HomeController> logger, IInternshipService intershipService, MessageService messagepService)
         {
             this.intershipService = intershipService;
+            this.messagepService = messagepService;
             _logger = logger;
         }
 
@@ -58,9 +60,10 @@ namespace RazorMvc.Controllers
         {
             return View(intershipService.GetMembers());
         }
+
         public IActionResult Chat()
         {
-            return View();
+            return View(messagepService.GetAllMessages());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
