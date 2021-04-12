@@ -36,11 +36,14 @@ namespace RazorMvc.Controllers
         }
 
         [HttpPut]
-        public void EditMember(int index, string name)
+        public void EditMember(int id, string memberName)
         {
-            Intern intern = new Intern();
-            intern.Id = index;
-            intern.Name = name;
+            var intern = new Intern
+            {
+                Id = id,
+                Name = memberName,
+                RegistrationDateTime = DateTime.Now,
+            };
             intershipService.EditMember(intern);
         }
 

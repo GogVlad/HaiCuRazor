@@ -23,7 +23,8 @@ namespace RazorMvc.Services
 
         public void EditMember(Intern intern)
         {
-            _internshipClass.Members[intern.Id] = intern;
+            var itemToBeUpdated = _internshipClass.Members.Single(_ => _.Id == intern.Id);
+            itemToBeUpdated.Name = intern.Name;
 
         }
 

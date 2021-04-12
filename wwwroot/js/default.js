@@ -51,10 +51,11 @@ $(document).ready(function () {
 
     $("#editClassmate").on("click", "#submit", function () {
         var name = $('#classmateName').val();
-        var index = $('#editClassmate').attr("memberIndex");
-        console.log(`/Home/EditMember?index=${index}&name=${name}`);
+        var id = $('#editClassmate').attr("member-id");
+        var targetMember = $('.name').eq(id);
+        console.log(`/Home/EditMember?id=${id}&memberName=${name}`);
         $.ajax({
-            url: `/Home/EditMember?index=${index}&name=${name}`,
+            url: `/Home/EditMember?id=${id}&memberName=${name}`,
             type: 'PUT',
             success: function () {
                 location.reload();

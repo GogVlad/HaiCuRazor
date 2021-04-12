@@ -24,7 +24,8 @@ namespace RazorMvc.Services
 
         public void EditMember(Intern intern)
         {
-            throw new NotImplementedException();
+            db.Interns.Update(intern);
+            db.SaveChanges();
         }
 
         public IList<Intern> GetMembers()
