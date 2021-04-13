@@ -2,8 +2,10 @@
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using RazorMvc.Data;
+using RazorMvc.Hubs;
 using RazorMvc.Models;
 using RazorMvc.Services;
 
@@ -12,29 +14,36 @@ namespace RazorMvc.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IInternshipService intershipService;
+        private readonly IInternshipService internshipService;
+        private readonly IHubContext<MessageHub> hubContext;
         private readonly MessageService messageService;
+        
 
-        public HomeController(ILogger<HomeController> logger, IInternshipService intershipService, MessageService messagepService)
+        public HomeController(ILogger<HomeController> logger, IInternshipService intershipService,IHubContext<MessageHub> hubContext, MessageService messageService)
         {
-            this.intershipService = intershipService;
-            this.messageService = messagepService;
+            this.internshipService = intershipService;
+            this.messageService = messageService;
+            this.hubContext = hubContext;
             _logger = logger;
         }
 
         [HttpDelete]
         public void RemoveMember(int index)
         {
-            intershipService.RemoveMember(index);
+            internshipService.RemoveMember(index);
         }
 
         [HttpGet]
         public Intern AddMember(string memberName)
         {
-            Intern intern = new Intern();
-            intern.Name = memberName;
-            intern.RegistrationDateTime = DateTime.Now;
-            return intershipService.AddMember(intern);
+            Intern intern = new Intern
+            {
+                Name = memberName,
+                RegistrationDateTime = DateTime.Now
+            };
+            var newMember = internshipService.AddMember(intern);
+            hubContext.Clients.All.SendAsync("AddMember", newMember.Name, newMember.Id);
+            return newMember;
         }
 
         [HttpPut]
@@ -46,19 +55,19 @@ namespace RazorMvc.Controllers
                 Name = memberName,
                 RegistrationDateTime = DateTime.Now,
             };
-            intershipService.EditMember(intern);
+            internshipService.EditMember(intern);
         }
 
 
         public IActionResult Index()
         {
-            var interns = intershipService.GetMembers();
+            var interns = internshipService.GetMembers();
             return View(interns);
         }
 
         public IActionResult Privacy()
         {
-            return View(intershipService.GetMembers());
+            return View(internshipService.GetMembers());
         }
 
         public IActionResult Chat()
