@@ -59,10 +59,6 @@ $(document).ready(function () {
             }),
             type: "PUT",
             url: `/api/Internship/${id}`,
-            success: function () {
-                //targetMember.replaceWith(name);
-                location.reload();
-            },
             error: function () {
                 alert(`Failed to replace member ${name}`);
             }
