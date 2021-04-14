@@ -19,9 +19,9 @@ namespace RazorMvc.Controllers
         private readonly IInternshipService internshipService;
         private readonly IHubContext<MessageHub> hubContext;
 
-        public InternshipController(IInternshipService intershipService, IHubContext<MessageHub> hubContext)
+        public InternshipController(IInternshipService internshipService, IHubContext<MessageHub> hubContext)
         {
-            this.internshipService = intershipService;
+            this.internshipService = internshipService;
             this.hubContext = hubContext;
         }
 
@@ -54,11 +54,6 @@ namespace RazorMvc.Controllers
         public void Put(int id, [FromBody] Intern intern)
         {
             intern.Id = id;
-            if (intern.RegistrationDateTime == DateTime.MinValue)
-            {
-                intern.RegistrationDateTime = DateTime.Now;
-            }
-
             internshipService.EditMember(intern);
         }
 
@@ -67,6 +62,7 @@ namespace RazorMvc.Controllers
         public void Delete(int id)
         {
             internshipService.RemoveMember(id);
+            hubContext.Clients.All.SendAsync("RemoveMember", id);
         }
     }
 }

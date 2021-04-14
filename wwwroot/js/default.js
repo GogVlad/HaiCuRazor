@@ -5,7 +5,12 @@ $(document).ready(function () {
         var newcomerName = $("#newcomer").val();
 
         $.ajax({
-            url: `/Home/AddMember?memberName=${newcomerName}`,
+            contentType: "application/json",
+            data: JSON.stringify({
+                "Name": `${newcomerName}`
+            }),
+            method: "POST",
+            url: `/api/Internship`,
             success: function (data) {
 
                 $("#newcomer").val("");
@@ -26,13 +31,11 @@ $(document).ready(function () {
         var targetMemberTag = $(this).closest('li');
         var id = targetMemberTag.attr('member-id');
         $.ajax({
-            url: `/Home/RemoveMember?index=${id}`,
-            type: 'DELETE',
-            success: function () {
-                targetMemberTag.remove();
-            },
+            contentType: "application/json",
+            type: "DELETE",
+            url: `/api/Internship/${id}`,
             error: function () {
-                alert(`Failed to delete member with index=${index}`);
+                alert(`Failed to delete member with index=${id}`);
             }
         })
     })
@@ -48,12 +51,16 @@ $(document).ready(function () {
     $("#editClassmate").on("click", "#submit", function () {
         var name = $('#classmateName').val();
         var id = $('#editClassmate').attr("member-id");
-        console.log(`/Home/EditMember?id=${id}&memberName=${name}`);
+        var targetMember = $('.name').eq(id);
         $.ajax({
-            url: `/Home/EditMember?id=${id}&memberName=${name}`,
-            type: 'PUT',
+            contentType: "application/json",
+            data: JSON.stringify({
+                "Name": `${name}`
+            }),
+            type: "PUT",
+            url: `/api/Internship/${id}`,
             success: function () {
-                location.reload();
+                targetMember.replaceWith(name);
             },
             error: function () {
                 alert(`Failed to replace member ${name}`);
