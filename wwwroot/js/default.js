@@ -42,9 +42,9 @@ $(document).ready(function () {
 
     $("#list").on("click", ".startEdit", function () {
         var targetMemberTag = $(this).closest('li');
-        var index = targetMemberTag.index();
+        var id = targetMemberTag.attr('member-id');
         var currentName = targetMemberTag.find(".name").text();
-        $('#editClassmate').attr("memberIndex", index);
+        $('#editClassmate').attr("member-id", id);
         $('#classmateName').val(currentName);
     })
 
@@ -60,7 +60,8 @@ $(document).ready(function () {
             type: "PUT",
             url: `/api/Internship/${id}`,
             success: function () {
-                targetMember.replaceWith(name);
+                //targetMember.replaceWith(name);
+                location.reload();
             },
             error: function () {
                 alert(`Failed to replace member ${name}`);
