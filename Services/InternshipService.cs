@@ -23,7 +23,7 @@ namespace RazorMvc.Services
 
         public void EditMember(Intern intern)
         {
-            var itemToBeUpdated = _internshipClass.Members.Single(_ => _.Id == intern.Id);
+            var itemToBeUpdated = GetMemberById(intern.Id);
             itemToBeUpdated.Name = intern.Name;
 
         }
@@ -33,9 +33,10 @@ namespace RazorMvc.Services
             return _internshipClass.Members;
         }
 
-        public void SubscribeToAddMember(IAddMemberSubscriber subscriber)
+        public Intern GetMemberById(int id)
         {
-            throw new System.NotImplementedException();
+            var member = _internshipClass.Members.Single(_ => _.Id == id);
+            return member;
         }
     }
 }

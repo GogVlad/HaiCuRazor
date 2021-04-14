@@ -11,26 +11,35 @@ namespace RazorMvc.Services
     public class InternshipDbService : IInternshipService
     {
         private readonly InternDbContext db;
-        private readonly List<IAddMemberSubscriber> subscribers;
 
         public InternshipDbService(InternDbContext db)
         {
             this.db = db;
-            this.subscribers = new List<IAddMemberSubscriber>();
         }
 
         public Intern AddMember(Intern member)
         {
             db.Interns.AddRange(member);
             db.SaveChanges();
-            subscribers.ForEach(subscriber => subscriber.OnAddMember(member));
             return member;
         }
 
         public void EditMember(Intern intern)
         {
-            db.Interns.Update(intern);
+            var itemToBeUpdated = GetMemberById(intern.Id);
+            itemToBeUpdated.Name = intern.Name;
+            if (intern.RegistrationDateTime == DateTime.MinValue)
+            {
+                intern.RegistrationDateTime = DateTime.Now;
+            }
+
+            db.Interns.Update(itemToBeUpdated);
             db.SaveChanges();
+        }
+
+        public Intern GetMemberById(int id)
+        {
+            return db.Find<Intern>(id);
         }
 
         public IList<Intern> GetMembers()
@@ -44,11 +53,6 @@ namespace RazorMvc.Services
             var intern = db.Find<Intern>(id);
             db.Remove<Intern>(intern);
             db.SaveChanges();
-        }
-
-        public void SubscribeToAddMember(IAddMemberSubscriber subscriber)
-        {
-            subscribers.Add(subscriber);
         }
     }
 }

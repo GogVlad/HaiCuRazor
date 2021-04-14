@@ -48,7 +48,6 @@ $(document).ready(function () {
     $("#editClassmate").on("click", "#submit", function () {
         var name = $('#classmateName').val();
         var id = $('#editClassmate').attr("member-id");
-        var targetMember = $('.name').eq(id);
         console.log(`/Home/EditMember?id=${id}&memberName=${name}`);
         $.ajax({
             url: `/Home/EditMember?id=${id}&memberName=${name}`,

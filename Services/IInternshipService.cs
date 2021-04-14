@@ -14,6 +14,7 @@ namespace RazorMvc.Services
 
         void RemoveMember(int index);
 
-        void SubscribeToAddMember(IAddMemberSubscriber messageHub);
+
+        Intern GetMemberById(int id);
     }
 }
