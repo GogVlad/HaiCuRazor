@@ -42,6 +42,8 @@ namespace RazorMVC.WebAPI.Controllers
             return weatherForecasts.GetRange(1, 5);
         }
 
+        [HttpGet ("/forecast")]
+
         public List<WeatherForecast> FetchWeatherForecasts()
         {
             var lat = double.Parse(configuration["WeatherForecast:Latitude"]);
@@ -55,6 +57,8 @@ namespace RazorMVC.WebAPI.Controllers
             Console.WriteLine(response.Content);
             return ConvertResponseContentToWeatherForecasts(response.Content);
         }
+
+        [NonAction]
 
         public List<WeatherForecast> ConvertResponseContentToWeatherForecasts(string content)
         {
