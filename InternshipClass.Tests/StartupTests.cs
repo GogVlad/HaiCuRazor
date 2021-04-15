@@ -20,5 +20,13 @@ namespace InternshipClass.Tests
             //Assert
             Assert.Equal("Server=ec2-99-80-200-225.eu-west-1.compute.amazonaws.com;Port=5432;Database=dc1nj3ujh52uk7;User Id=uxdhdkwzilyzlr;Password=b4209a83facb6c744fd0b947cc5f847761d11c6eb29820fd3c92f1fc4531f04a;Pooling=true;SSL Mode=Require;Trust Server Certificate=True;", herokuConnectionString);
         }
+        [Fact]
+        public void ShouldThrowExceptionOnCorruptUrl()
+        {
+            //Assume
+            var url = "Server=127.0.0.1;Port=5432;Database=internshipclass;User Id=internshipclassuser;Password=Fr1OkxLb3CBtnOClJzCv;";
+            //Act and Assert
+            Assert.Throws<FormatException>(() => Startup.ConvertDbUrlToConnectionString(url));
+        }
     }
 }
