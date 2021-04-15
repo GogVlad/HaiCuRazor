@@ -9,6 +9,7 @@ Application is deployed to [heroku](https://borys-internship-class.herokuapp.com
 To work with this application you need to install:
 * [.Net Core SDK 5.0+](https://dotnet.microsoft.com/download/dotnet/5.0) - to run and develop the application
 * [heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) - to deploy the application
+* [postgres](https://www.postgresql.org/download/) - database engine for the application
 
 ## Build and run locally
 
