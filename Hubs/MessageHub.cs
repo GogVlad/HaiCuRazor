@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
-using RazorMvc.Models;
 using RazorMvc.Services;
 
 namespace RazorMvc.Hubs

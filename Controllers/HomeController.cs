@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
-using RazorMvc.Data;
 using RazorMvc.Hubs;
 using RazorMvc.Models;
 using RazorMvc.Services;
@@ -17,7 +15,6 @@ namespace RazorMvc.Controllers
         private readonly IInternshipService internshipService;
         private readonly IHubContext<MessageHub> hubContext;
         private readonly MessageService messageService;
-        
 
         public HomeController(ILogger<HomeController> logger, IInternshipService intershipService,IHubContext<MessageHub> hubContext, MessageService messageService)
         {
@@ -39,7 +36,7 @@ namespace RazorMvc.Controllers
             Intern intern = new Intern
             {
                 Name = memberName,
-                RegistrationDateTime = DateTime.Now
+                RegistrationDateTime = DateTime.Now,
             };
             var newMember = internshipService.AddMember(intern);
             hubContext.Clients.All.SendAsync("AddMember", newMember.Name, newMember.Id);

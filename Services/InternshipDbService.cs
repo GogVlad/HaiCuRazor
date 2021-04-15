@@ -1,10 +1,8 @@
-﻿using RazorMvc.Data;
-using RazorMvc.Hubs;
-using RazorMvc.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using RazorMvc.Data;
+using RazorMvc.Models;
 
 namespace RazorMvc.Services
 {
@@ -52,7 +50,10 @@ namespace RazorMvc.Services
         {
             var intern = db.Find<Intern>(id);
             if (intern == null)
+            {
                 return;
+            }
+
             db.Remove<Intern>(intern);
             db.SaveChanges();
         }

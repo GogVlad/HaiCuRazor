@@ -1,6 +1,5 @@
-﻿using RazorMvc.Hubs;
+﻿using System.Collections.Generic;
 using RazorMvc.Models;
-using System.Collections.Generic;
 
 namespace RazorMvc.Services
 {

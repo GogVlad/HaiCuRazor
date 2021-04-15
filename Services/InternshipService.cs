@@ -1,7 +1,6 @@
-﻿using RazorMvc.Data;
-using RazorMvc.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using RazorMvc.Models;
 
 namespace RazorMvc.Services
 {
