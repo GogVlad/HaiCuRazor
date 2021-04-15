@@ -27,9 +27,9 @@ namespace RazorMvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                  options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<InternDbContext>(options =>
-                  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                  options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddControllersWithViews();
             services.AddScoped<IInternshipService,InternshipDbService>();
