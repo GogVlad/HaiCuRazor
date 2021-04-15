@@ -2,7 +2,7 @@
 
 The infrastructure inspiration got [here](https://dev.to/alrobilliard/deploying-net-core-to-heroku-1lfe) 
 
-Application is deployed to [heroku](https://borys-internship-class.herokuapp.com/)
+Application is deployed to [heroku](https://internship-class-vlad.herokuapp.com/)
 
 ## Prerequisites
 
@@ -25,17 +25,17 @@ dotnet run
 ## Build and run in docker
 
 ```
-docker build -t mvc .
-docker run -d -p 8080:80 --name mvc_container mvc
+docker build -t mvc_vlad .
+docker run -d -p 8080:80 --name mvc_container_vlad mvc_vlad
 ```
 
 to stop container
 ```
-docker stop mvc_container
+docker stop mvc_container_vlad
 ```
 to remove container
 ```
-docker rm mvc_container
+docker rm mvc_container_vlad
 ```
 
 ## Deploy to heroku
@@ -58,5 +58,5 @@ heroku container:push -a internship-class-vlad web
 
 Release the container
 ```
-heroku container:release -a internship-class-vlad web
+heroku container:release -a docker rm mvc_container_vlad web
 ```
