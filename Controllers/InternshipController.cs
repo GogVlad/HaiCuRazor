@@ -40,7 +40,6 @@ namespace RazorMvc.Controllers
         [HttpPost]
         public void Post([FromBody] Intern intern)
         {
-
             intern.RegistrationDateTime = DateTime.Now;
             var newMember = internshipService.AddMember(intern);
             hubContext.Clients.All.SendAsync("AddMember", newMember.Name, newMember.Id);

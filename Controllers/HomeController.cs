@@ -16,7 +16,7 @@ namespace RazorMvc.Controllers
         private readonly IHubContext<MessageHub> hubContext;
         private readonly MessageService messageService;
 
-        public HomeController(ILogger<HomeController> logger, IInternshipService intershipService,IHubContext<MessageHub> hubContext, MessageService messageService)
+        public HomeController(ILogger<HomeController> logger, IInternshipService intershipService, IHubContext<MessageHub> hubContext, MessageService messageService)
         {
             this.internshipService = intershipService;
             this.messageService = messageService;
@@ -54,7 +54,6 @@ namespace RazorMvc.Controllers
             };
             internshipService.EditMember(intern);
         }
-
 
         public IActionResult Index()
         {

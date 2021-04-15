@@ -38,7 +38,7 @@ namespace RazorMVC.WebAPI.Controllers
             return weatherForecasts.GetRange(1, 5);
         }
 
-        [HttpGet ("/forecast")]
+        [HttpGet("/forecast")]
 
         public List<WeatherForecast> FetchWeatherForecasts()
         {
@@ -70,6 +70,7 @@ namespace RazorMVC.WebAPI.Controllers
                     Summary = token["weather"][0]["description"].ToString(),
                 });
             }
+
             return forecasts;
         }
     }

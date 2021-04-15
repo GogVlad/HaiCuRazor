@@ -6,7 +6,7 @@ namespace RazorMvc.Services
 {
     public class InternshipService : IInternshipService
     {
-        private readonly InternshipClass _internshipClass = new();
+        private readonly InternshipClass _internshipClass = new ();
 
         public void RemoveMember(int id)
         {
@@ -24,7 +24,6 @@ namespace RazorMvc.Services
         {
             var itemToBeUpdated = GetMemberById(intern.Id);
             itemToBeUpdated.Name = intern.Name;
-
         }
 
         public IList<Intern> GetMembers()

@@ -19,7 +19,7 @@ namespace RazorMvc.Services
 
         public void AddMessage(string user, string messageContent)
         {
-            Message message = new Message(user,messageContent);
+            Message message = new Message(user, messageContent);
             allMessages.Add(message);
         }
     }
