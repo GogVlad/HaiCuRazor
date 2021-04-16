@@ -72,6 +72,19 @@ namespace InternshipClass.Tests
 
         }
 
+        [Fact (Skip ="No exception")]
+        public void ShouldHandleJsonErrorFromWeatherApi()
+        {
+            //Assume
+            string content = GetStreamLines();
+            WeatherForecastController weatherForecastController = InstantiateWeatherForecastController();
+
+            //Act
+
+            //Assert
+            Assert.Throws<Exception>(() => weatherForecastController.ConvertResponseContentToWeatherForecasts(content));
+        }
+
         private string GetStreamLines()
         {
             var assembly = this.GetType().Assembly;

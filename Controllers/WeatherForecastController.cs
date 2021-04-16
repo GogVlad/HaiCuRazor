@@ -56,6 +56,13 @@ namespace RazorMVC.WebAPI.Controllers
         {
             JToken root = JObject.Parse(content);
             JToken testToken = root["daily"];
+            if (testToken == null)
+            {
+                JToken codToken = root["cod"];
+                JToken messageToken = root["message"];
+                throw new Exception($"Weather API doesn't work. Please check the weather API: {messageToken} {codToken}");
+            }
+
             List<WeatherForecast> forecasts = new List<WeatherForecast>();
             foreach (var token in testToken)
             {
