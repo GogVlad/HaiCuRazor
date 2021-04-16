@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -42,8 +43,8 @@ namespace RazorMVC.WebAPI.Controllers
 
         public List<WeatherForecast> FetchWeatherForecasts()
         {
-            var lat = double.Parse(configuration["WeatherForecast:Latitude"]);
-            var lon = double.Parse(configuration["WeatherForecast:Longitude"]);
+            var lat = double.Parse(configuration["WeatherForecast:Latitude"],CultureInfo.InvariantCulture);
+            var lon = double.Parse(configuration["WeatherForecast:Longitude"], CultureInfo.InvariantCulture);
             var apiKey = configuration["WeatherForecast:ApiKey"];
 
             var client = new RestClient($"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=hourly,minutely&appid={apiKey}");
