@@ -29,7 +29,7 @@ namespace RazorMVC.WebAPI.Controllers
         /// <summary>
         /// Getting weather forecast for five days.
         /// </summary>
-        /// <returns>Enumerable of weatherForecast objects.</returns>
+        /// <returns>List of weatherForecast objects.</returns>
         [HttpGet]
         public List<WeatherForecast> Get()
         {
@@ -38,6 +38,12 @@ namespace RazorMVC.WebAPI.Controllers
             return weatherForecasts.GetRange(1, 5);
         }
 
+        /// <summary>
+        /// Getting the weather forecast for a specific location for 8 days (today and 7 days after).
+        /// </summary>
+        /// <param name="lat">It should be from -90 to 90. Ex: for brasov it is 45.75.</param>
+        /// <param name="lon">It should be from -180 to 180. Ex: for brasov it is 25.3333.</param>
+        /// <returns>List of weatherForecast objects.</returns>
         [HttpGet("/forecast")]
 
         public List<WeatherForecast> Get(double lat, double lon)
