@@ -40,11 +40,11 @@ namespace InternshipClass.Tests
             WeatherForecastController weatherForecastController = InstantiateWeatherForecastController();
 
             // Act
-            var weatherForecasts = weatherForecastController.FetchWeatherForecasts();
+            var weatherForecasts = weatherForecastController.Get();
             WeatherForecast weatherForcastForTomorrow = weatherForecasts[1];
 
             // Assert
-            Assert.Equal(8, weatherForecasts.Count);
+            Assert.Equal(5, weatherForecasts.Count);
 
         }
 

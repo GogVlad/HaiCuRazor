@@ -31,16 +31,16 @@ namespace RazorMVC.WebAPI.Controllers
         /// </summary>
         /// <returns>Enumerable of weatherForecast objects.</returns>
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public List<WeatherForecast> Get()
         {
-            var weatherForecasts = FetchWeatherForecasts();
+            var weatherForecasts = Get(lat,lon);
 
             return weatherForecasts.GetRange(1, 5);
         }
 
         [HttpGet("/forecast")]
 
-        public List<WeatherForecast> FetchWeatherForecasts()
+        public List<WeatherForecast> Get(double lat, double lon)
         {
             var client = new RestClient($"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=hourly,minutely&appid={apiKey}");
             client.Timeout = -1;
