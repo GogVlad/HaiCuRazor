@@ -13,18 +13,17 @@ namespace RazorMVC.WebAPI.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching",
-        };
-
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IConfiguration configuration;
+        private readonly double lat;
+        private readonly double lon;
+        private readonly string apiKey;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
         {
             _logger = logger;
-            this.configuration = configuration;
+            this.lat = double.Parse(configuration["WeatherForecast:Latitude"], CultureInfo.InvariantCulture);
+            this.lon = double.Parse(configuration["WeatherForecast:Longitude"], CultureInfo.InvariantCulture);
+            this.apiKey = configuration["WeatherForecast:ApiKey"];
         }
 
         /// <summary>
@@ -43,10 +42,6 @@ namespace RazorMVC.WebAPI.Controllers
 
         public List<WeatherForecast> FetchWeatherForecasts()
         {
-            var lat = double.Parse(configuration["WeatherForecast:Latitude"],CultureInfo.InvariantCulture);
-            var lon = double.Parse(configuration["WeatherForecast:Longitude"], CultureInfo.InvariantCulture);
-            var apiKey = configuration["WeatherForecast:ApiKey"];
-
             var client = new RestClient($"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=hourly,minutely&appid={apiKey}");
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
