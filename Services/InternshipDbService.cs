@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 using RazorMvc.Data;
 using RazorMvc.Models;
 
@@ -9,17 +10,35 @@ namespace RazorMvc.Services
     public class InternshipDbService : IInternshipService
     {
         private readonly InternDbContext db;
+        private IConfiguration configuration;
+        private Location defaultLocation;
 
-        public InternshipDbService(InternDbContext db)
+        public InternshipDbService(InternDbContext db, IConfiguration configuration)
         {
             this.db = db;
+            this.configuration = configuration;
         }
 
         public Intern AddMember(Intern member)
         {
+            if(member.Location==null)
+            {
+                member.Location = GetDefaultLocation();
+            }
             db.Interns.AddRange(member);
             db.SaveChanges();
             return member;
+        }
+
+        private Location GetDefaultLocation()
+        {
+            if (defaultLocation == null)
+            {
+                var defaultLocationName = configuration["DefaultLocation"];
+                defaultLocation = db.Locations.Where(_ => _.Name == defaultLocationName).OrderBy(_ => _.Id).FirstOrDefault();
+            }
+
+            return defaultLocation;
         }
 
         public void EditMember(Intern intern)
