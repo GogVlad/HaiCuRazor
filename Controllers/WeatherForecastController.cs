@@ -33,7 +33,7 @@ namespace RazorMVC.WebAPI.Controllers
         [HttpGet]
         public List<WeatherForecast> Get()
         {
-            var weatherForecasts = Get(lat,lon);
+            var weatherForecasts = Get(lat, lon);
 
             return weatherForecasts.GetRange(1, 5);
         }

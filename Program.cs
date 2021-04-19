@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,31 +13,35 @@ namespace RazorMvc
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
+            bool recreateDb = args.Contains("--recreateDb");
 
-            CreateDbIfNotExists(host);
+            InitializeDb(host, recreateDb);
 
             host.Run();
         }
 
-        private static void CreateDbIfNotExists(IHost host)
+        private static void InitializeDb(IHost host, bool recreateDb)
         {
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+                var logger = services.GetRequiredService<ILogger<Program>>();
                 try
                 {
                     var context = services.GetRequiredService<InternDbContext>();
                     var webHostEnvironment = services.GetRequiredService<IWebHostEnvironment>();
-                    if (webHostEnvironment.IsDevelopment())
+                    if (webHostEnvironment.IsDevelopment() && recreateDb)
                     {
+                    logger.LogDebug("User requested to recreate database.");
                     context.Database.EnsureDeleted();
                     context.Database.EnsureCreated();
+                    logger.LogWarning("Database was recreated.");
                     }
+
                     SeedData.Initialize(context);
                 }
                 catch (Exception ex)
                 {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred creating the DB.");
                 }
             }
