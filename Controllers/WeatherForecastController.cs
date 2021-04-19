@@ -21,9 +21,9 @@ namespace RazorMVC.WebAPI.Controllers
         public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
         {
             _logger = logger;
-            this.lat = double.Parse(configuration["WeatherForecast:Latitude"], CultureInfo.InvariantCulture);
-            this.lon = double.Parse(configuration["WeatherForecast:Longitude"], CultureInfo.InvariantCulture);
-            this.apiKey = configuration["WeatherForecast:ApiKey"];
+            this.lat = Environment.GetEnvironmentVariable("Lat") != null ? double.Parse(Environment.GetEnvironmentVariable("Lat"), CultureInfo.InvariantCulture) : double.Parse(configuration["WeatherForecast:Latitude"], CultureInfo.InvariantCulture);
+            this.lon = Environment.GetEnvironmentVariable("Lon") != null ? double.Parse(Environment.GetEnvironmentVariable("Lon"), CultureInfo.InvariantCulture) : double.Parse(configuration["WeatherForecast:Longitude"], CultureInfo.InvariantCulture);
+            this.apiKey = Environment.GetEnvironmentVariable("API_Key") != null ? Environment.GetEnvironmentVariable("API_Key") : configuration["WeatherForecast:ApiKey"];
         }
 
         /// <summary>
