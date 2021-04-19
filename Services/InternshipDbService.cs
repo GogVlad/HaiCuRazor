@@ -37,7 +37,9 @@ namespace RazorMvc.Services
 
         public Intern GetMemberById(int id)
         {
-            return db.Find<Intern>(id);
+            var intern = db.Find<Intern>(id);
+            db.Entry(intern).Reference(_ => _.Location).Load();
+            return intern;
         }
 
         public IList<Intern> GetMembers()
