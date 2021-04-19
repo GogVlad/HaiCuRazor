@@ -34,7 +34,6 @@ namespace RazorMvc
                     {
                     logger.LogDebug("User requested to recreate database.");
                     context.Database.EnsureDeleted();
-                    context.Database.EnsureCreated();
                     logger.LogWarning("Database was recreated.");
                     }
 
