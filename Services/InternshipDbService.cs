@@ -78,5 +78,13 @@ namespace RazorMvc.Services
             db.Remove<Intern>(intern);
             db.SaveChanges();
         }
+
+        public void EditLocation(int id, int locationId)
+        {
+            var intern = db.Find<Intern>(id);
+            var location = db.Find<Location>(locationId);
+            intern.Location = location;
+            db.SaveChanges();
+        }
     }
 }

@@ -36,5 +36,10 @@ namespace RazorMvc.Services
             var member = _internshipClass.Members.Single(_ => _.Id == id);
             return member;
         }
+
+        public void EditLocation(int id, int locationId)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
