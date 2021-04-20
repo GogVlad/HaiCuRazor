@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
     <Compile Remove="InternshipClass.Tests\**" />
     <Compile Remove="InternshipClass.WebAPI\**" />
     <Compile Remove="out\**" />
