@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace RazorMvc.Models
@@ -17,6 +18,7 @@ namespace RazorMvc.Models
 
         public string Url { get; set; }
 
+        [JsonIgnore]
         public ICollection<Intern> Interns { get; set; }
     }
 }

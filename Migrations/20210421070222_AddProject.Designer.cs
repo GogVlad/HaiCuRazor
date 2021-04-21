@@ -10,7 +10,7 @@ using RazorMvc.Data;
 namespace RazorMvc.Migrations
 {
     [DbContext(typeof(InternDbContext))]
-    [Migration("20210420091538_AddProject")]
+    [Migration("20210421070222_AddProject")]
     partial class AddProject
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
