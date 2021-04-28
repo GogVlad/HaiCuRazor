@@ -1,0 +1,161 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title> Angajati </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        body {
+            margin-top: 20px;
+            margin-left: 25px;
+            font-size: 18px;
+        }
+
+        .buton {
+            margin-left: 40%;
+        }
+
+        .question {
+            font-size: 25px;
+            font-style: italic;
+        }
+
+        .sentence {
+            font-size: 35px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 50px;
+            margin-left: 40%;
+        }
+
+        .subButton {
+            font-size: 25px;
+            transition-duration: 0.4s;
+        }
+
+            .subButton:hover {
+                font-size: 25px;
+                background-color: green;
+                color: white;
+            }
+
+        .delButton {
+            font-size: 25px;
+            transition-duration: 0.4s;
+        }
+
+            .delButton:hover {
+                font-size: 25px;
+                background-color: red;
+                color: white;
+            }
+    </style>
+
+</head>
+<body>
+    <p class="title"><b>Angajat</b></p>
+    <br>
+    <br>
+    <p class="sentence"><b>Buna ziua, va rog sa completati urmatorul formular cu datele dumneavoastra: </b></p>
+    <div class="container">
+        <div class="form-group">
+            <div class="form-group">
+                <label class="question col-5" for="numeAngajat">Nume</label>
+                <input type="text" class="form-control col" name="numeAngajat"
+                       id="numeAngajat" placeholder="Nume*:" required />
+            </div>
+            <div class="form-group">
+                <label class="question col-5" for="prenumeAngajat">Prenume</label>
+                <input type="text" class="form-control col" name="prenumeAngajat"
+                       id="prenumeAngajat" placeholder="Prenume*:" required />
+            </div>
+            <div class="form-group">
+                <label class="question">Sexul dumneavoastra:</label>
+                <br>
+                <label for="genAngajat">Sex:</label>
+                <select id="genAngajat" name="genAngajat">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="question col-5" for="emailAngajat">Email</label>
+                <input type="text" class="form-control col" name="emailAngajat"
+                       id="emailAngajat" placeholder="Email*:" required />
+            </div>
+
+            <div class="form-group">
+                <label class="question col-5" for="dataN">Data dumneavoastra de nastere:</label>
+                <input type="date" class="form-control col" id="dataN" name="dataN" required />
+            </div>
+
+            <div class="col-xs-10 col-xs-offset-2 buton">
+                <button name="submitAngajat" class="subButton" id="submitAngajat" onclick="onClickSubmit()"> Submit</button>
+            </div>
+            <br>
+            <br>
+            <div id="searchWrapper" class="form-group">
+                <input class="form-control col"
+                       type="text"
+                       name="searchBar"
+                       id="searchBar"
+                       onkeyup="searchEmployee()"
+                       placeholder="Cautare angajat" />
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Angajati</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <table id="angajatiT" class="table table-bordered table-condensed table-striped">
+                        <tr>
+                            <th>Nume</th>
+                            <th>Prenume</th>
+                            <th>Sex</th>
+                            <th>Email</th>
+                            <th>Data de nastere</th>
+                        </tr>
+                        <tr>
+                            <td>Test</td>
+                            <td>Test</td>
+                            <td>Test</thd>
+                            <td>Test</td>
+                            <td>Test</td>
+                            <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
+                        </tr>
+                        <tr>
+                            <td>Test1</td>
+                            <td>Test1</td>
+                            <td>Test1</td>
+                            <td>Test1</td>
+                            <td>Test1</td>
+                            <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
+                        </tr>
+                        <tr>
+                            <td>Test2</td>
+                            <td>Test2</td>
+                            <td>Test2</td>
+                            <td>Test2</td>
+                            <td>Test2</td>
+                            <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+
+            <script type="text/javascript" src="~/js/Employees.js"></script>
+</body>
+</html>

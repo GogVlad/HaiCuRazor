@@ -71,6 +71,11 @@ namespace RazorMvc.Controllers
             return View(messageService.GetAllMessages());
         }
 
+        public IActionResult Employees()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
