@@ -19,7 +19,7 @@ namespace RazorMvc.Migrations
                     Email = table.Column<string>(type: "text", nullable: true),
                     Gender = table.Column<string>(type: "text", nullable: true),
                     Birthdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Picture = table.Column<string>(type: "text", nullable: true)
+                    Picture = table.Column<string>(type: "text", nullable: true),
                 },
                 constraints: table =>
                 {

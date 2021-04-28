@@ -17,7 +17,7 @@ namespace RazorMvc.Migrations
                     Name = table.Column<string>(type: "text", nullable: true),
                     StartDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IsPublished = table.Column<bool>(type: "boolean", nullable: false),
-                    Url = table.Column<string>(type: "text", nullable: true)
+                    Url = table.Column<string>(type: "text", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -29,7 +29,7 @@ namespace RazorMvc.Migrations
                 columns: table => new
                 {
                     InternsId = table.Column<int>(type: "integer", nullable: false),
-                    ProjectsId = table.Column<int>(type: "integer", nullable: false)
+                    ProjectsId = table.Column<int>(type: "integer", nullable: false),
                 },
                 constraints: table =>
                 {

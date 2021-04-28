@@ -20,6 +20,5 @@ namespace RazorMvc.Models
 
         [JsonIgnore]
         public List<Intern> LocalInterns { get; set; }
-
     }
 }

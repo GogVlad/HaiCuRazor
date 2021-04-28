@@ -22,7 +22,7 @@ namespace RazorMvc.Migrations
                     Name = table.Column<string>(type: "text", nullable: true),
                     NativeName = table.Column<string>(type: "text", nullable: true),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
-                    Longitude = table.Column<double>(type: "double precision", nullable: false)
+                    Longitude = table.Column<double>(type: "double precision", nullable: false),
                 },
                 constraints: table =>
                 {
